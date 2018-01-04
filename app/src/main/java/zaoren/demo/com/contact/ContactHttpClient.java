@@ -5,9 +5,6 @@ import android.content.pm.PackageManager;
 
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
-import com.netease.nim.uikit.common.http.NimHttpClient;
-import com.netease.nim.uikit.common.util.log.LogUtil;
-import com.netease.nim.uikit.common.util.string.MD5;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -15,6 +12,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import zaoren.demo.com.DemoCache;
+import zaoren.demo.com.base.http.NimHttpClient;
+import zaoren.demo.com.base.util.log.LogUtil;
+import zaoren.demo.com.base.util.string.MD5;
 
 /**
  * Created by Administrator on 2017/12/27.
@@ -92,30 +92,30 @@ public class ContactHttpClient {
 
         NimHttpClient.getInstance().execute(url, headers, bodyString, new NimHttpClient.NimHttpCallback() {
             @Override
-            public void onResponse(String response, int code, Throwable exception) {
-                if (code != 200 || exception != null) {
-                    LogUtil.e(TAG, "register failed : code = " + code + ", errorMsg = "
-                            + (exception != null ? exception.getMessage() : "null"));
-                    if (callback != null) {
-                        callback.onFailed(code, exception != null ? exception.getMessage() : "null");
-                    }
-                    return;
-                }
+            public void onResponse(String response, int code, String errorMsg) {
+                        if (code != 200 || errorMsg != null) {
+                            LogUtil.e(TAG, "register failed : code = " + code + ", errorMsg = "
+                                    + (errorMsg != null ?errorMsg  : "null"));
+                            if (callback != null) {
+                                callback.onFailed(code, errorMsg != null ? errorMsg : "null");
+                            }
+                            return;
+                        }
 
-                try {
-                    JSONObject resObj = JSONObject.parseObject(response);
-                    int resCode = resObj.getIntValue(RESULT_KEY_RES);
-                    if (resCode == RESULT_CODE_SUCCESS) {
-                        callback.onSuccess(null);
-                    } else {
-                        String error = resObj.getString(RESULT_KEY_ERROR_MSG);
-                        callback.onFailed(resCode, error);
-                    }
-                } catch (JSONException e) {
-                    callback.onFailed(-1, e.getMessage());
-                }
-            }
-        });
+                        try {
+                            JSONObject resObj = JSONObject.parseObject(response);
+                            int resCode = resObj.getIntValue(RESULT_KEY_RES);
+                            if (resCode == RESULT_CODE_SUCCESS) {
+                                callback.onSuccess(null);
+                            } else {
+                                String error = resObj.getString(RESULT_KEY_ERROR_MSG);
+                                callback.onFailed(resCode, error);
+                            }
+                        } catch (JSONException e) {
+                            callback.onFailed(-1, e.getMessage());
+                        }
+
+        }});
     }
 
     private String readAppKey() {
