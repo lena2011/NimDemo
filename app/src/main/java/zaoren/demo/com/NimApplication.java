@@ -4,7 +4,6 @@ import android.app.Application;
 
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.auth.LoginInfo;
-import com.netease.nimlib.sdk.util.NIMUtil;
 
 /**
  * Created by Administrator on 2017/12/27.

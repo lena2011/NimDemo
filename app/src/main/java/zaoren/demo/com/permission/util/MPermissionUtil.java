@@ -5,12 +5,15 @@ import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.v4.app.Fragment;
+import android.support.v7.view.menu.MenuWrapperFactory;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
+import zaoren.demo.com.DebugLog;
 import zaoren.demo.com.permission.annotation.OnMPermissionDenied;
 import zaoren.demo.com.permission.annotation.OnMPermissionGranted;
 import zaoren.demo.com.permission.annotation.OnMPermissionNeverAskAgain;
@@ -35,9 +38,32 @@ final public class MPermissionUtil {
     @TargetApi(Build.VERSION_CODES.M)
     public static List<String> findDeniedPermissions(Activity activity, String... permissions) {
         List<String> denyPermissions = new ArrayList<>();
+        for (String value : permissions) {
+            if (activity.checkSelfPermission(value) != PackageManager.PERMISSION_GRANTED) {
+                denyPermissions.add(value);
+            }
+        }
+        return denyPermissions;
+    }
+
+    @TargetApi(Build.VERSION_CODES.M)
+    public  static  List<String> findNeverAskAgainPermissions(Activity activity, String... permissions){
+        List<String> neverAskAgainPermission=new ArrayList<>();
         for (String value :
                 permissions) {
-            if (activity.checkSelfPermission(value) != PackageManager.PERMISSION_GRANTED) {
+            if (activity.checkSelfPermission(value)!=PackageManager.PERMISSION_GRANTED&&!activity.shouldShowRequestPermissionRationale(value)){
+                neverAskAgainPermission.add(value);
+            }
+        }
+        return neverAskAgainPermission;
+    }
+
+    @TargetApi(Build.VERSION_CODES.M)
+    public static  List<String> findDeniedPermissionWithoutNeverAskAgain(Activity activity, String... permissions){
+        List<String> denyPermissions=new ArrayList<>();
+        for (String value:
+             permissions) {
+            if (activity.checkSelfPermission(value)!=PackageManager.PERMISSION_GRANTED&&activity.shouldShowRequestPermissionRationale(value)){
                 denyPermissions.add(value);
             }
         }
@@ -67,7 +93,7 @@ final public class MPermissionUtil {
         return null;
     }
 
-    public  static  boolean isEqualRequestCodeFromAnnotation(Method method,Class clazz,int requestCode){
+    private   static  boolean isEqualRequestCodeFromAnnotation(Method method,Class clazz,int requestCode){
         if (clazz.equals(OnMPermissionDenied.class)){
             return  requestCode==method.getAnnotation(OnMPermissionDenied.class).value();
         }else  if (clazz.equals(OnMPermissionGranted.class)){
@@ -77,5 +103,26 @@ final public class MPermissionUtil {
         }else {
             return  false;
         }
+    }
+
+    public static String toString(List<String> permission) {
+        if (permission==null||permission.isEmpty()){
+            return "";
+        }
+        return toString(permission.toArray(new String[permission.size()]));
+    }
+
+    private   static String toString(String[] permission){
+        if (permission==null||permission.length<=0)
+            return "";
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String p :
+                permission) {
+            stringBuilder.append(p.replaceFirst("android.permission",""));
+            stringBuilder.append(",");
+        }
+
+        stringBuilder.deleteCharAt(stringBuilder.length()-1);
+        return  stringBuilder.toString();
     }
 }

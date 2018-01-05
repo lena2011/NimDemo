@@ -50,6 +50,51 @@ public class MPermission {
         return this;
     }
 
+    public static List<String> getDeniedPermissions(Activity activity, String[] permissions) {
+        return getDeniedPermissions((Object) activity, permissions);
+    }
+
+    public static List<String> getDeniedPermissions(Fragment fragment, String[] permissions) {
+        return getDeniedPermissions((Object) fragment, permissions);
+    }
+
+    public static List<String> getNeverAskAgainPermission(Activity activity, String[] permissions) {
+        return getNeverAskAgainPermission((Object) activity, permissions);
+    }
+
+    public static List<String> getNeverAskAgainPermission(Fragment fragment, String[] permissions) {
+        return getNeverAskAgainPermission((Object) fragment, permissions);
+    }
+
+    public static  List<String> getDeniedPermissionsWithoutNeverAskAgain(Activity activity,String[] permissions){
+        return getDeniedPermissionsWithoutNeverAskAgain((Object)activity,permissions);
+    }
+
+    public static  List<String> getDeniedPermissionsWithoutNeverAskAgain(Fragment fragment,String[] permissions){
+        return getDeniedPermissionsWithoutNeverAskAgain((Object)fragment,permissions);
+    }
+
+    private static List<String> getDeniedPermissions(Object object, String[] permissions) {
+        if (permissions == null || permissions.length <= 0) {
+            return null;
+        }
+        return MPermissionUtil.findDeniedPermissions(getActivity(object), permissions);
+    }
+
+    private static List<String> getNeverAskAgainPermission(Object object, String[] permissions) {
+        if (permissions == null || permissions.length <= 0)
+            return null;
+        return MPermissionUtil.findNeverAskAgainPermissions(getActivity(object), permissions);
+
+    }
+
+    private  static  List<String> getDeniedPermissionsWithoutNeverAskAgain(Object object,String[] permissions){
+        if (permissions==null||permissions.length<=0){
+            return  null;
+        }
+        return MPermissionUtil.findDeniedPermissionWithoutNeverAskAgain(getActivity(object),permissions);
+    }
+
     @TargetApi(value = Build.VERSION_CODES.M)
     public void request() {
         requestPermissions(mObject, requestCode, permissions);
@@ -57,7 +102,7 @@ public class MPermission {
 
     @TargetApi(value = Build.VERSION_CODES.M)
     private static void requestPermissions(Object object, int requestCode, String[] permissions) {
-        if (MPermissionUtil.isOverMarshmallow()) {
+        if (!MPermissionUtil.isOverMarshmallow()) {
             doExecuteSuccess(object, requestCode);
             return;
         }
