@@ -60,7 +60,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".im.LoginActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
 
@@ -110,11 +110,11 @@
             android:process=":core" />
 
         <activity
-            android:name=".RegisterActivity"
+            android:name=".im.RegisterActivity"
             android:label="@string/title_activity_register"
             android:theme="@style/AppTheme"/>
         <activity
-            android:name=".entertainment.LiveActivity"
+            android:name=".entertainment.activity.LiveActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
     </application>

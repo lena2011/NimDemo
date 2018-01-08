@@ -1,4 +1,4 @@
-package zaoren.demo.com.entertainment;
+package zaoren.demo.com.entertainment.activity;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -46,7 +46,7 @@ public class LiveActivity extends LivePlayerBaseActivity {
     @BindView(R.id.start_live)
     Button mStartLive;
     private AVChatCameraCapturer mVideoCapturer;
-    private  String meetingName;//视频会议房间名称
+    private String meetingName;//视频会议房间名称
 
     @Override
     protected int getActvityLayout() {
@@ -60,28 +60,28 @@ public class LiveActivity extends LivePlayerBaseActivity {
     }
 
     @OnClick(R.id.start_live)
-    void  setStartLive(){
-            createChannel();
+    void setStartLive() {
+        createChannel();
     }
 
     private void createChannel() {
-this.meetingName= StringUtil.get36UUID();
-AVChatManager.getInstance().createRoom(meetingName, null, new AVChatCallback<AVChatChannelInfo>() {
-    @Override
-    public void onSuccess(AVChatChannelInfo avChatChannelInfo) {
+        this.meetingName = StringUtil.get36UUID();
+        AVChatManager.getInstance().createRoom(meetingName, null, new AVChatCallback<AVChatChannelInfo>() {
+            @Override
+            public void onSuccess(AVChatChannelInfo avChatChannelInfo) {
 
-    }
+            }
 
-    @Override
-    public void onFailed(int code) {
+            @Override
+            public void onFailed(int code) {
 
-    }
+            }
 
-    @Override
-    public void onException(Throwable exception) {
+            @Override
+            public void onException(Throwable exception) {
 
-    }
-});
+            }
+        });
     }
 
     @Override

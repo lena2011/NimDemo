@@ -5,15 +5,12 @@ import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.v4.app.Fragment;
-import android.support.v7.view.menu.MenuWrapperFactory;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-import zaoren.demo.com.DebugLog;
 import zaoren.demo.com.permission.annotation.OnMPermissionDenied;
 import zaoren.demo.com.permission.annotation.OnMPermissionGranted;
 import zaoren.demo.com.permission.annotation.OnMPermissionNeverAskAgain;

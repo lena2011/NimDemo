@@ -8,7 +8,9 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import zaoren.demo.com.entertainment.LiveActivity;
+import zaoren.demo.com.entertainment.activity.LiveActivity;
+import zaoren.demo.com.im.LoginActivity;
+import zaoren.demo.com.im.RegisterActivity;
 
 public class MainActivity extends AppCompatActivity {
     @BindView(R.id.login)

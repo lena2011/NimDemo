@@ -1,4 +1,4 @@
-package zaoren.demo.com;
+package zaoren.demo.com.im;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +9,8 @@ import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import zaoren.demo.com.contact.ContactHttpClient;
+import zaoren.demo.com.R;
+import zaoren.demo.com.im.http.RegisterHttpClient;
 
 public class RegisterActivity extends AppCompatActivity {
     @BindView(R.id.username)
@@ -37,7 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void register(String username, String nickname, String password) {
-        ContactHttpClient.getInstance().register(username, nickname, password, new ContactHttpClient.ContactHttpCallback<Void>() {
+        RegisterHttpClient.getInstance().register(username, nickname, password, new RegisterHttpClient.ContactHttpCallback<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();

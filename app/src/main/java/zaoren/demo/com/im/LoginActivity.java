@@ -1,12 +1,10 @@
-package zaoren.demo.com;
+package zaoren.demo.com.im;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -19,7 +17,8 @@ import com.netease.nimlib.sdk.auth.LoginInfo;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import zaoren.demo.com.base.util.log.LogUtil;
+import zaoren.demo.com.base.util.log.DebugLog;
+import zaoren.demo.com.R;
 import zaoren.demo.com.base.util.string.MD5;
 
 /**

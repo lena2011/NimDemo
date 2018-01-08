@@ -2,14 +2,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<com.netease.nimlib.sdk.avchat.model.AVChatSurfaceViewRenderer
-    android:id="@+id/surface_view"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" />
+
+    <com.netease.nimlib.sdk.avchat.model.AVChatSurfaceViewRenderer
+        android:id="@+id/surface_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <Button
         android:id="@+id/start_live"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="开始直播"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true"
+        android:text="开始直播" />
 </RelativeLayout>

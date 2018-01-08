@@ -1,4 +1,4 @@
-package zaoren.demo.com.contact;
+package zaoren.demo.com.im.http;
 
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -20,8 +20,8 @@ import zaoren.demo.com.base.util.string.MD5;
  * Created by Administrator on 2017/12/27.
  */
 
-public class ContactHttpClient {
-    private static final String TAG = "ContactHttpClient";
+public class RegisterHttpClient {
+    private static final String TAG = "RegisterHttpClient";
 
     // code
     private static final int RESULT_CODE_SUCCESS = 200;
@@ -50,17 +50,17 @@ public class ContactHttpClient {
         void onFailed(int code, String errorMsg);
     }
 
-    private static ContactHttpClient instance;
+    private static RegisterHttpClient instance;
 
-    public static synchronized ContactHttpClient getInstance() {
+    public static synchronized RegisterHttpClient getInstance() {
         if (instance == null) {
-            instance = new ContactHttpClient();
+            instance = new RegisterHttpClient();
         }
 
         return instance;
     }
 
-    private ContactHttpClient() {
+    private RegisterHttpClient() {
         NimHttpClient.getInstance().init(DemoCache.getContext());
     }
 

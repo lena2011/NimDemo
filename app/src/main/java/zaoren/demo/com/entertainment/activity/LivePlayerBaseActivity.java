@@ -1,12 +1,11 @@
-package zaoren.demo.com.entertainment;
+package zaoren.demo.com.entertainment.activity;
 
 import android.Manifest;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 
 import butterknife.ButterKnife;
-import zaoren.demo.com.BaseActivity;
+import zaoren.demo.com.base.BaseActivity;
 import zaoren.demo.com.permission.MPermission;
 
 /**

@@ -1,4 +1,4 @@
-package zaoren.demo.com.entertainment;
+package zaoren.demo.com.entertainment.activity;
 
 import android.os.Bundle;
 import android.os.PersistableBundle;
