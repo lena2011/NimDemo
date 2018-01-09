@@ -10,6 +10,7 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import zaoren.demo.com.R;
+import zaoren.demo.com.base.http.BaseHttpClient;
 import zaoren.demo.com.im.http.RegisterHttpClient;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -38,7 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void register(String username, String nickname, String password) {
-        RegisterHttpClient.getInstance().register(username, nickname, password, new RegisterHttpClient.ContactHttpCallback<Void>() {
+        RegisterHttpClient.getInstance().register(username, nickname, password, new BaseHttpClient.HttpCallback<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();

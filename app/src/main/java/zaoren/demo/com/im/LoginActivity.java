@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.netease.nimlib.sdk.AbortableFuture;
 import com.netease.nimlib.sdk.NIMClient;
@@ -17,9 +19,12 @@ import com.netease.nimlib.sdk.auth.LoginInfo;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import zaoren.demo.com.base.util.log.DebugLog;
+import zaoren.demo.com.DemoCache;
 import zaoren.demo.com.R;
+import zaoren.demo.com.base.util.ControlUtil;
+import zaoren.demo.com.base.util.log.DebugLog;
 import zaoren.demo.com.base.util.string.MD5;
+import zaoren.demo.com.im.config.AuthPreferences;
 
 /**
  * A login screen that offers login via email/password.
@@ -33,6 +38,8 @@ public class LoginActivity extends AppCompatActivity {
     EditText mPassword;
     @BindView(R.id.sign)
     Button mSign;
+    @BindView(R.id.register)
+    TextView mRegister;
     private AbortableFuture<LoginInfo> loginRequest;
 
     @Override
@@ -49,6 +56,12 @@ public class LoginActivity extends AppCompatActivity {
         attemptLogin();
     }
 
+    @OnClick(R.id.register)
+    void register() {
+        ControlUtil.go2Register(this);
+
+    }
+
     /**
      * Attempts to sign in or register the account specified by the login form.
      * If there are form errors (invalid email, missing fields, etc.), the
@@ -58,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // Store values at the time of the login attempt.
         String email = mAccount.getText().toString();
-        String password = mPassword.getText().toString();
+        final String password = mPassword.getText().toString();
 
         // 云信只提供消息通道，并不包含用户资料逻辑。开发者需要在管理后台或通过服务器接口将用户帐号和token同步到云信服务器。
         // 在这里直接使用同步到云信服务器的帐号和token登录。
@@ -70,13 +83,22 @@ public class LoginActivity extends AppCompatActivity {
         loginRequest.setCallback(new RequestCallback<LoginInfo>() {
             @Override
             public void onSuccess(LoginInfo param) {
-//todo 登录成功
+                //todo 登录成功
                 DebugLog.i(param.getAccount());
+                DemoCache.setAccount(account);
+                saveLoginInfo(account, token);
+                ControlUtil.go2Mian(LoginActivity.this);
+                finish();
+
             }
 
             @Override
             public void onFailed(int code) {
-
+                if (code == 302 || code == 404) {
+                    Toast.makeText(LoginActivity.this, "账号或密码错误", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(LoginActivity.this, "登录失败" + code, Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
@@ -84,6 +106,17 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    /**
+     * 保存用户信息
+     *
+     * @param account
+     * @param token
+     */
+    private void saveLoginInfo(String account, String token) {
+        AuthPreferences.saveUserAccount(account);
+        AuthPreferences.saveUserToken(token);
     }
 
 

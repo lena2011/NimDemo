@@ -17,6 +17,7 @@
         android:layout_height="wrap_content"
         android:inputType="text"
         android:maxLines="1"
+        android:text="lena07"
         android:singleLine="true" />
 
 
@@ -28,6 +29,7 @@
         android:imeActionId="6"
         android:imeActionLabel="@string/action_sign_in_short"
         android:imeOptions="actionUnspecified"
+        android:text="123456"
         android:inputType="textPassword"
         android:maxLines="1"
         android:singleLine="true" />
@@ -39,7 +41,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/action_sign_in"
+        android:text="登录"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/register"
+        style="?android:textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:padding="10dp"
+        android:background="@color/gray"
+        android:gravity="center"
+        android:text="注册"
         android:textStyle="bold" />
 
 </LinearLayout>

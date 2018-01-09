@@ -14,4 +14,60 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="开始直播" />
+
+    <LinearLayout
+        android:id="@+id/master_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/master_avatar"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@mipmap/avatar" />
+
+            <TextView
+                android:id="@+id/master_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_toRightOf="@id/master_avatar"
+                android:text="lena" />
+
+            <TextView
+                android:id="@+id/online_count_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="20dp"
+                android:layout_below="@id/master_name"
+                android:layout_toRightOf="@id/master_avatar"
+                android:text="2" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="房间ID:" />
+
+            <TextView
+                android:id="@+id/room_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="dsds" />
+        </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>

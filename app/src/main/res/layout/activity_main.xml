@@ -8,19 +8,12 @@
     tools:context="zaoren.demo.com.MainActivity">
 
     <TextView
-        android:id="@+id/login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="登录"
-         />
-    <TextView
         android:id="@+id/register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:padding="10dp"
-        android:text="注册"/>
+        android:text="注册" />
 
     <TextView
         android:id="@+id/live"
@@ -28,6 +21,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:padding="10dp"
-        android:text="直播"/>
+        android:text="视频直播" />
+
+    <TextView
+        android:id="@+id/audio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:text="语音直播" />
+
 
 </LinearLayout>

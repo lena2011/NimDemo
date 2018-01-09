@@ -1,5 +1,7 @@
 package zaoren.demo.com.base.util;
 
+import android.text.TextUtils;
+
 import java.util.UUID;
 
 /**
@@ -12,6 +14,10 @@ public class StringUtil {
         UUID uuid=UUID.randomUUID();
         String uniqueId=uuid.toString();
         return uniqueId;
+    }
+
+    public  static  boolean isEmpty(String input){
+        return TextUtils.isEmpty(input);
     }
 
 }
